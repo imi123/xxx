@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example of Twitter Bootstrap 3 Panels with Table</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .bs-example{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="bs-example">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Environment Information</div>
+        <div class="panel-body">
+            <!-- Table    <p></p>  -->
+
+        </div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Sensor</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>John</td>
+                <td>Carter</td>
+                <td>johncarter@mail.com</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Peter</td>
+                <td>Parker</td>
+                <td>peterparker@mail.com</td>
+            </tr>
+            <tr style="background-color: lawngreen">
+                <td >3</td>
+                <td>John</td>
+                <td>Rambo</td>
+                <td >Low Alarm</td>
+            </tr>
+
+            <tr style="background-color: lawngreen">
+                <td>4</td>
+                <td>Mouse room Temp</td>
+                <td>27 C</td>
+                <td > Ok</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>                                		

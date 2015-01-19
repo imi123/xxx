@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WHRS</title>
+    <script src="../../js/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="../assets/css/odometer-theme-car.css" />
+    <script src="../js/odometer.js"></script>
+
+
+<!---->   <!---->
+    <style>
+
+       .jumbotron-other-color {
+           background: #e4e4e4;
+           line-height: 60px;
+      }
+     .jumbotron{  height: 274px;}
+
+        bodyy { padding: 50px; background-color: #222; }
+        .led {
+            margin: 20px auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: #000 0 -1px 6px 1px;
+        }
+
+
+        .led-green {
+            background-color: #80FF00;
+            box-shadow: #000 0 -1px 18px 1px, inset #460 0 -1px 10px, #80FF00 0 6px 18px;
+        }
+        .led-red {
+            background-color: #F00;
+            box-shadow: #000 0 -1px 6px 1px, inset #600 0 -1px 8px, #F00 0 3px 11px;
+        }
+        .odometer {
+            font-size: 40px;
+
+        }
+    </style>
+
+    <script type='text/javascript'>
+        var whrs=0;
+        $(function() {
+            $('#loadRequest').click(function() {
+             $('.odometer').html(whrs);
+            })
+        });
+
+    $(function() {
+           // $('#loadRequest').click(function() {
+            setInterval(function(){
+            $.get('/devstat', function(res) {
+                    //alert(res)
+                    var arr = res.split(",");
+                    $('#val').text(arr[0]);
+                     //alert(arr[1])
+                     var p = whrs = parseInt(arr[1]);
+                     $('#odometer').html( p );
+                     $('#loadRequest').trigger('click');
+                });
+                console.log('test');
+            },   1000);
+     });
+
+
+   (function($){
+          //  $('#countup').countup();   jquery upcounter
+   })(jQuery);
+
+
+    </script>
+
+</head>
+<body>
+
+
+<!--- http://stackoverflow.com/questions/21955697/variables-between-node-js-server-and-client --->
+<button id="loadRequest" hidden>Refresh</button>
+
+<div  class="jumbotron text-center jumbotron-other-color" ;>
+ <span class="fa fa-lock"></span>
+     <h1>      <%  vartyog %>   </h1>
+   <h6>© Pécsi Tudományegyetem
+       Szentágothai János Kutatóközpont : <span id="val"><%=vartyog%></span></h6>
+   <h1> Device Status </h1>
+<div class="led <%= led %>"></div> <!--- http://jsfiddle.net/XrHcA/  --->
+<div class="odometer"><%= odo %>   </div> <!-- http://jsfiddle.net/adamschwartz/rx6BQ/ -->
+
+
+
+</div>
+
+
+</body>
+</html>

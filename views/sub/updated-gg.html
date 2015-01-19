@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title> AHC Device </title>
+
+<script type='text/javascript' src='../js/jquery-1.9.1.js'></script>
+<!--  jsFiddle demo by wschalle
+<script src="http://192.168.1.116:8080/socket.io/socket.io.js"></script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+<link rel="stylesheet" type="text/css" href="/">
+
+<link rel="stylesheet" type="text/css" href="/css/result-light.css">
+     <link href="../js/dd.css" rel="stylesheet" type="text/css" />
+     -->
+<style>
+    #wrapper {
+        max-width: auto;
+        height: 400px;
+        overflow: auto;
+    }
+
+    #left {
+        width: 400px;
+        height: 400px;
+        overflow: auto;
+        background-color: yellow;
+    }
+
+    #right {
+        max-width: 400px;
+        background-color: cyan;
+        height: 400px;
+    }
+
+    .fl {
+        float: left;
+    }
+
+    .clr {
+        clear: both;
+    }
+
+
+
+
+
+</style>
+    <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+    <script type='text/javascript' src="../js/highcharts.js"></script>
+
+
+<script type='text/javascript' src="js/highcharts-more.src.js"></script>
+    <script type='text/javascript' src="../js/ui/jquery-ui.js"></script>
+
+
+<script type='text/javascript'>
+
+    z_array = new Array();
+    m_PIN   = "";  m_POU   = "";
+    ahcseries=[];
+ //   var socket = io.connect('http://192.168.1.116:8080');
+//    socket.emit("start",{txt:"this is a message from client-adatkérés" });
+ //   socket.on("pong",function(data){
+ //       $("#msgbox").append(data.txt+"<br>");
+        ////////////alert(this.socket.sessionid);
+//    });
+
+
+
+
+
+function updateGaugeChart1(chart, value){
+    var point = chart.series[0].points[0];
+    var newVal = value;
+    point.update(newVal);
+}
+
+function updateGaugeChart2(chart, value){
+    var point = chart.series[0].points[0];
+    var newVal = value;
+    point.update(newVal);
+}
+
+
+
+
+$(function () {
+    var chartObj1 = {
+
+        chart: {
+            type: 'gauge',
+            renderTo:"container1"
+        },
+        credits: {   //license disable
+            enabled: false
+        },
+        pane: {
+            startAngle: -150,
+            endAngle: 150
+
+        },
+        title: {text: "PIN"},
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 400,
+
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: 'PIN'
+            }
+
+        },
+        series: [{
+            //center: ['20%'],
+            name: 'Pin',
+            data: [80],
+            tooltip: {
+                valueSuffix: ' PIN'
+            }
+        }]
+
+    }
+    var gaugeChartObj1 = new Highcharts.Chart(chartObj1);
+
+    $("#slider1").slider({
+        value: 200,
+        range: "min",
+        min:0,
+        max:400,
+        animate: true,
+        slide: function( event, ui ) {
+            $("#slider1-val").text("PIN  :"+parseInt( ui.value));
+            updateGaugeChart1(gaugeChartObj1, ui.value);
+        }
+    });
+
+    //óóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóó
+
+    var chartObj2 = {
+
+        chart: {
+            type: 'gauge',
+            renderTo:"container2"
+        },
+        credits: {   //license disable
+            enabled: false
+        },
+        pane: {
+            startAngle: -150,
+            endAngle: 150
+
+        },
+        title: {text: "POUT"},
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 400,
+
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: 'POUT'
+            }
+
+        },
+        series: [{
+            center: ['20%'],
+            name: 'Pout',
+            data: [180],
+            tooltip: {
+                valueSuffix: ' POUT'
+            }
+        }]};
+    var gaugeChartObj2 = new Highcharts.Chart(chartObj2);
+
+
+    $("#slider2").slider({
+        value: 100,
+        range: "min",
+        min:0,
+        max:400,
+        animate: true,
+        slide: function( event, ui ) {
+            $("#slider2-val").text("POUT :"+parseInt(ui.value));
+            updateGaugeChart2(gaugeChartObj2, ui.value);
+        }
+    });
+
+/*
+    socket.on("msg",function(data){
+        //$("#msgbox").append(data.txt+"<br>");  alert( data.txt);
+        z_array=data;
+        ////////////k_array=z_array.text.slice(';');
+        if (z_array.txt.length==64) {
+
+            m_PIN= z_array.txt.slice(24,32); //start end
+            m_POU= z_array.txt.slice(33,41); //start end
+            //////////////////////graph.update([ parseInt(m_AHC)  , Math.random() * 30 , Math.random() * 30, Math.random() * 30 , Math.random() * 30 ]);
+            /////////////////////graph.xAxisLabelArr = ["AHC="+m_AHC , "PIN", "POUT", "TMP","RH"];
+            updateGaugeChart1( gaugeChartObj1, parseInt(m_PIN) );
+            updateGaugeChart2( gaugeChartObj2, parseInt(m_POU) );
+            //alert(m_AHC);
+        }
+    });
+
+*/
+
+
+
+
+
+
+
+
+    $("#button").click( function()
+            {
+                alert('button clicked');
+            }
+    );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</head>
+<body>
+
+
+<!--  <div id="container" style="min-width: 310px; max-width: 400px; height: 300px; margin: 0 auto"></div> .-->
+
+<div id="container1" class="fl"><div> </div></div>
+
+
+<div id="wrapper">
+    <!---->
+   <div id="container2" class="fl"><div> </div><div>  </div></div>
+    <div class="clr"></div>
+</div>
+
+
+
+    <div id="slider1"></div>
+<div id="slider1-val" style="border:1px solid #000; display:inline">75</div>
+
+<div id="slider2"></div>
+<div id="slider2-val" style="border:1px solid #000; display:inline">180</div>
+<br> <br> <br>
+<input id = "button" type="submit" value="Reset"/> <input id = "button1" type="submit" value="Save"/>
+<br> <br> <br>
+<!--
+<div class="highcharts-container" id="chart_10001" style="width: 500px; height: 300px; text-align: left; line-height: normal; overflow: hidden; font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif; font-size: 12px; position: relative; z-index: 0; cursor: pointer;"></div>
+-->
+
+</body>
+
+
+</html>
+

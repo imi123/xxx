@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+</head>
+<body>
+<div class="bs-example">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Environment Information</div>
+        <div class="panel-body">
+            <!-- Table    <p></p>  -->
+
+        </div>
+        <!-- Table -->
+        <table class="table  table-bordered ">
+            <thead>
+            <tr>
+                <th>room</th>
+                <th>Sensor</th>
+                <th>Value</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="p1" style="background-color:  #26ff1c">
+                <td>All</td>
+                <td>Power</td>
+                <td>220V</td>
+                <td>OK</td>
+            </tr>
+            <tr style="background-color:  #26ff1c">
+                <td>Rat</td>
+                <td>Peter</td>
+                <td>Parker</td>
+                <td>peter</td>
+            </tr>
+            <tr id="p3" style="background-color: #26ff1c">
+                <td>Mouse</td>
+                <td>John</td>
+                <td>Rambo</td>
+                <td >Low</td>
+            </tr>
+
+            <tr style="background-color:  #26ff1c">
+                <td>Mouse</td>
+                <td>Temp</td>
+                <td>27 C</td>
+                <td > Ok</td>
+            </tr>
+            <tr style="background-color:  #26ff1c">
+                <td>rand</td>
+                <td id="rnd"></td>
+                <td>lastrec</td>
+                <td id="lstrc"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+
+    //DOM loaded
+    $(document).ready(function() {
+
+        //attach click event to button
+      //  $('.button').click(function(){
+        setInterval(function(){
+            /**
+             * when button is clicked we fade to 10% opacity
+             * and after 100 ms we fade the box back to 100%
+             */
+            //$('#p1').addClass(style="background-color:  #ffff1c");
+            //$('p1').css( {'background-color':'black'} );​
+    //   $("#p3").fadeTo(100, 0.1).fadeTo(200, 1.0);
+            // $("#p3").effect( "highlight",{color:'#FFFF00',easing:'easeInElastic'},4000 );
+            //$(".col-md-91").html(ch2_);
+
+        //    $("#p3").effect( "highlight",{color:'#FFFF00',easing:'easeInElastic'},300 );
+
+
+        }, 700);
+
+        $(function() {
+            // $('#loadRequest').click(function() {
+            setInterval(function(){
+                $.get('/devstat', function(res) {
+                    //alert(res)
+                    //                   var arr = res.split(",");
+                    //                   $('#val').text(arr[0]);
+                    //                   alert(res.led)
+                    //                    var p = whrs = parseInt(arr[1]);
+                    //                    $('#odometer').html( p );
+                    //                    $('#loadRequest').trigger('click');
+
+                    $('#rnd').text(res.rndnm);       //random number a z sqlből
+                    $('#lstrc').text(res.odo);
+
+                    var p1 = whrs = parseInt(res.odo); //recno
+                    ledcolorp22  = res.led;             //led
+                    ch2_=(res.ch2);                     //ch2
+
+
+
+                    $('#odometer').html( p1 );
+
+
+                    $('#loadRequest').trigger('click');
+
+//                $('#led').led=res.led
+                    ///               console.log(  "<%= led %>"  );
+                });
+
+            },   4000);
+        });
+
+    });
+
+
+
+</script>
+
+
+</body>
+</html>                                		

@@ -1,0 +1,290 @@
+
+<html>
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title> Light Meter</title> <!--   jsFiddle demo by wschalle -->
+
+<script type='text/javascript' src='/js/jquery-1.9.1.js'></script>
+
+<script type="text/javascript" src="/js/jquery-migrate-1.1.0.js"></script>
+<!--   <link rel="stylesheet" type="text/css" href="/"> -->
+<!--    <link rel="stylesheet" type="text/css" href="/css/result-light.css"> -->
+<script type='text/javascript' src="../../js/highcharts.js"></script>
+<script type='text/javascript' src="../../js/highcharts-more.src.js"></script>
+<style type='text/css'>
+</style>
+
+
+<script type='text/javascript'>//<![CDATA[
+$(window).load(function(){
+    $(function () {
+        var chart_10001;
+        chart_10001 = new Highcharts.Chart({
+            "chart": {
+                "animation": false,
+                "events": {
+                    "click": function () {
+                        window.location = '#'
+                    }
+                },
+
+                "height": 300,
+                "renderTo": "chart_10001",
+                "style": {
+                    "cursor": "pointer"
+                },
+                "width": 500
+            },
+            credits: {   //license disable
+                enabled: false
+            },
+            "pane": {
+                "background": [{
+                    "backgroundColor": {
+                        "linearGradient": {
+                            "x1": 0,
+                            "y1": 0,
+                            "x2": 0,
+                            "y2": 1
+                        },
+                        "stops": [
+                            [0, "#FFF"],
+                            [1, "#333"]
+                        ]
+                    },
+                    "borderWidth": 0,
+                    "outerRadius": "109%"
+                }, {
+                    "backgroundColor": {
+                        "linearGradient": {
+                            "x1": 0,
+                            "y1": 0,
+                            "x2": 0,
+                            "y2": 1
+                        },
+                        "stops": [
+                            [0, "#333"],
+                            [1, "#FFF"]
+                        ]
+                    },
+                    "borderWidth": 1,
+                    "outerRadius": "107%"
+                },
+                    [], {
+                        "backgroundColor": "#DDD",
+                        "borderWidth": 0,
+                        "outerRadius": "105%",
+                        "innerRadius": "103%"
+                    }, {
+                        "backgroundColor": {
+                            "radialGradient": {
+                                "cx": 0.5,
+                                "cy": 0.52,
+                                "r": 0.2
+                            },
+                            "stops": [
+                                [0, "rgba(0,0,0,0.1)"],
+                                [1, "rgba(255,255,255,0)"]
+                            ]
+                        },
+                        "outerRadius": "90%",
+                        "innerRadius": "5%",
+                        "borderWidth": 0
+                    }
+                ],
+                "endAngle": 150,
+                "startAngle": -150
+            },
+            "plotOptions": {
+                "gauge": {
+                    "dial": {
+                        "backgroundColor": "#000000",
+                        "baseWidth": 7,
+                        "borderColor": {
+                            "linearGradient": {
+                                "x1": 0,
+                                "y1": 0,
+                                "x2": 0,
+                                "y2": 1
+                            },
+                            "stops": [
+                                [0, "#333"],
+                                [1, "#BBB"]
+                            ]
+                        },
+                        "borderWidth": 2
+                    },
+                    "pivot": {
+                        "backgroundColor": "#f0f0f0",
+                        "borderColor": {
+                            "linearGradient": {
+                                "x1": 0,
+                                "y1": 0,
+                                "x2": 0,
+                                "y2": 1
+                            },
+                            "stops": [
+                                [0, "#EEE"],
+                                [1, "#333"]
+                            ]
+                        },
+                        "borderWidth": 2,
+                        "radius": 4
+                    },
+                    "stickyTracking": false
+                }
+            },
+
+            "series": [{
+                "data": [{
+                    "y": 5,
+                    "name": "Target",
+                    "color": "#000",
+                    "dial": {
+                        "backgroundColor": "#3a54bf",
+                        "borderWidth": 0,
+                        "radius": "70%"
+                    },
+                    "dataLabels": {
+                        "enabled": false
+                    },
+                    "events": {
+                        "mouseOver": function () {
+                            if (typeof this.originalColor == 'undefined') this.originalColor = this.graphic.fill;
+                            this.graphic.attr('fill', Highcharts.Color(this.originalColor).brighten(0.2).get('rgb'));
+                        },
+                        "mouseOut": function () {
+                            this.graphic.attr('fill', this.originalColor);
+                        },
+                        "click": function () {
+                            window.location = '#'
+                        }
+                    }
+                }, {
+                    "y": 0.3072,
+                    "name": "Ligt+Infra , Infra",
+                    "color": "#000",
+                    "events": {
+                        "mouseOver": function () {
+                            if (typeof this.originalColor == 'undefined') this.originalColor = this.graphic.fill;
+                            this.graphic.attr('fill', Highcharts.Color(this.originalColor).brighten(0.2).get('rgb'));
+                        },
+                        "mouseOut": function () {
+                            this.graphic.attr('fill', this.originalColor);
+                        },
+                        "click": function () {
+                            window.location = '#'
+                        }
+                    }
+                }
+                ],
+                "name": "light meter",
+                "type": "gauge",
+                "dataLabels": {
+                    "backgroundColor": {
+                        "linearGradient": {
+                            "x1": 0,
+                            "y1": 0,
+                            "x2": 0,
+                            "y2": 1
+                        },
+                        "stops": [
+                            [0, "#555"],
+                            [1, "#000"]
+                        ]
+                    },
+                    "borderColor": {
+                        "linearGradient": {
+                            "x1": 0,
+                            "y1": 0,
+                            "x2": 0,
+                            "y2": 1
+                        },
+                        "stops": [
+                            [0, "#333"],
+                            [1, "#BBB"]
+                        ]
+                    },
+                    "color": "#cfd",
+                    "y": 74,
+                    "borderRadius": 2,
+                    "borderWidth": 3,
+                    "padding": 4,
+                    "formatter": function () {
+                        return Highcharts.numberFormat(this.y, 1);
+                    },
+                    "style": {
+                        "fontSize": "11px"
+                    }
+                }
+            }
+            ],
+            "subtitle": {
+                "text": " only Infra"
+            },
+            "title": {
+                "text":   "Light+Infra (lux) "
+            },
+            "tooltip": {
+                "enabled": true,
+                "formatter": function () {
+                    return '<div class="tooltip"><span style="font-weight:bold;color:#91ccff">' + this.point.name + ':</span> ' + Highcharts.numberFormat(this.y, 1) + '%</div>'
+                },
+                "useHTML": true,
+                "valueDecimals": 2,
+                "followPointer": true
+            },
+            "yAxis": {
+                "labels": {
+                    "rotation": 0,
+                    "step": 1,
+                    "style": {
+                        "fontFamily": "Verdana",
+                        "fontWeight": "bold",
+                        "fontSize": "12px"
+                    },
+                    "distance": -30
+                },
+                "max": 11,
+                "min": 0,
+                "minorTickColor": "#666",
+                "minorTickInterval": 0.55,
+                "minorTickLength": 10,
+                "minorTickPosition": "inside",
+                "minorTickWidth": 1,
+                "plotBands": [{
+                    "color": "#FF4040",
+                    "from": 0,
+                    "to": 4.3989
+                }, {
+                    "color": "#F6EA82",
+                    "from": 4.4,
+                    "to": 8.7989
+                }, {
+                    "color": "#88D888",
+                    "from": 8.8,
+                    "to": 11
+                }
+                ],
+                "tickColor": "#666",
+                "tickInterval": 2.75,
+                "tickLength": 10,
+                "tickPosition": "inside",
+                "tickWidth": 2
+            }
+        });
+    });
+});//]]>
+
+</script>
+
+
+</head>
+<body>
+<div class="highcharts-container" id="chart_10001" style="width: 500px; height: 300px; text-align: left; line-height: normal; overflow: hidden; ,   Verdana, Arial, Helvetica, sans-serif; font-size: 12px; position: relative; z-index: 0; cursor: pointer;"></div>
+</body>
+
+</html>
+
